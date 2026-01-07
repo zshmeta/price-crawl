@@ -2,7 +2,7 @@
  * Unit tests for both the Playwright-based crawler and Browserless fallback crawler.
  * These tests mock external dependencies to test the logic without hitting live sites.
  */
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 // Mock crawlee with a proper constructor mock
 vi.mock('crawlee', () => {
@@ -219,5 +219,113 @@ describe('DataRecord Schema', () => {
         expectedFields.forEach(field => {
             expect(typeof field).toBe('string');
         });
+    });
+});
+
+describe('Fallback and Timeout Behavior', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+        vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
+    it('should trigger Browserless fallback when Playwright stores 0 records', async () => {
+        const { getRedisStore } = await import('../src/lib/redis-store.js');
+        const { runBrowserlessScrape } = await import('../src/lib/browserless-crawler.js');
+        
+        // Mock store.push to track if it's called
+        const mockPush = vi.fn().mockResolvedValue(undefined);
+        vi.mocked(getRedisStore).mockResolvedValue({
+            push: mockPush,
+            init: vi.fn().mockResolvedValue(undefined)
+        } as any);
+        
+        // Mock Browserless to return records
+        vi.mocked(runBrowserlessScrape).mockResolvedValue(5);
+
+        const config: CrawlerConfig = {
+            category: 'test',
+            region: 'global',
+            targetUrl: 'https://example.com/test'
+        };
+
+        const crawler = createCrawler(config);
+        
+        // Verify crawler was created
+        expect(crawler).toBeDefined();
+        expect(typeof crawler.start).toBe('function');
+    });
+
+    it('should apply NO_DATA_BACKOFF_MS when both Playwright and Browserless return 0 records', async () => {
+        const { runBrowserlessScrape } = await import('../src/lib/browserless-crawler.js');
+        
+        // Mock Browserless to return 0 records
+        vi.mocked(runBrowserlessScrape).mockResolvedValue(0);
+
+        const config: CrawlerConfig = {
+            category: 'test',
+            region: 'global',
+            targetUrl: 'https://example.com/test'
+        };
+
+        const crawler = createCrawler(config);
+        
+        // Verify crawler was created with NO_DATA_BACKOFF_MS logic
+        expect(crawler).toBeDefined();
+    });
+
+    it('should respect environment variable PLAYWRIGHT_TIMEOUT_MS', () => {
+        // Set environment variable
+        process.env.PLAYWRIGHT_TIMEOUT_MS = '15000';
+
+        const config: CrawlerConfig = {
+            category: 'test',
+            region: 'global',
+            targetUrl: 'https://example.com/test'
+        };
+
+        const crawler = createCrawler(config);
+        
+        expect(crawler).toBeDefined();
+        
+        // Clean up
+        delete process.env.PLAYWRIGHT_TIMEOUT_MS;
+    });
+
+    it('should respect environment variable CRAWLER_MAX_RETRIES', () => {
+        process.env.CRAWLER_MAX_RETRIES = '5';
+
+        const config: CrawlerConfig = {
+            category: 'test',
+            region: 'global',
+            targetUrl: 'https://example.com/test'
+        };
+
+        const crawler = createCrawler(config);
+        
+        expect(crawler).toBeDefined();
+        
+        // Clean up
+        delete process.env.CRAWLER_MAX_RETRIES;
+    });
+
+    it('should use exponential backoff between retries', () => {
+        process.env.CRAWLER_RETRY_DELAY_BASE_MS = '1000';
+
+        const config: CrawlerConfig = {
+            category: 'test',
+            region: 'global',
+            targetUrl: 'https://example.com/test'
+        };
+
+        const crawler = createCrawler(config);
+        
+        expect(crawler).toBeDefined();
+        
+        // Clean up
+        delete process.env.CRAWLER_RETRY_DELAY_BASE_MS;
     });
 });

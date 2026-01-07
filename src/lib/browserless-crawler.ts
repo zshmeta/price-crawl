@@ -11,6 +11,8 @@ export interface BrowserlessConfig {
 }
 
 const DEFAULT_ROW_SELECTOR = '.datatable-v2_row__hkEus';
+const BROWSERLESS_TIMEOUT_MS = parseInt(process.env.BROWSERLESS_TIMEOUT_MS || '30000', 10);
+const BROWSERLESS_WAIT_UNTIL = process.env.BROWSERLESS_WAIT_UNTIL || 'networkidle2';
 
 /**
  * Scrapes price data using the browserless npm package.
@@ -25,7 +27,7 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
     
     // Here we create a browserless browser instance with sensible defaults matching the README
     const browser = createBrowser({
-        timeout: 30000,
+        timeout: BROWSERLESS_TIMEOUT_MS,
         lossyDeviceName: true,
         ignoreHTTPSErrors: true
     });
@@ -39,8 +41,14 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
         // Here we create a browser context (like opening a new tab)
         browserless = await browser.createContext({ retry: 2 });
         
-        // Here we use the evaluate method to run custom extraction logic
-        const extractData = browserless.evaluate(async (page: any) => {
+        // Here we use withPage + goto pattern to avoid closure capture issues
+        const extractData = browserless.withPage((page: any, goto: any) => async (opts: any) => {
+            await goto(page, {
+                url: opts.url,
+                waitUntil: BROWSERLESS_WAIT_UNTIL as any,
+                timeout: BROWSERLESS_TIMEOUT_MS
+            });
+            
             // Wait for the table rows to appear
             try {
                 await page.waitForSelector(rowSelector, { timeout: 20000 });
@@ -50,7 +58,7 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
             
             // Extract data from the table rows
             const rawData = await page.$$eval(rowSelector, (rows: Element[]) => {
-                return rows.map(row => {
+                return rows.map((row: any) => {
                     const nameEl = row.querySelector('h4') || row.querySelector('a.font-semibold');
                     const name = nameEl?.textContent?.trim();
                     
@@ -70,12 +78,9 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
             });
             
             return rawData;
-        }, { 
-            waitUntil: 'networkidle2',
-            timeout: 30000
-        });
+        }, { timeout: BROWSERLESS_TIMEOUT_MS });
         
-        const rawData = await extractData(config.targetUrl);
+        const rawData = await extractData({ url: config.targetUrl });
         
         log.info(`[Browserless/${config.category}/${config.region}] Extracted ${rawData.length} records`);
         
