@@ -14,6 +14,8 @@ export interface BrowserlessConfig {
 }
 
 const DEFAULT_ROW_SELECTOR = '.datatable-v2_row__hkEus';
+const BROWSERLESS_TIMEOUT_MS = parseInt(process.env.BROWSERLESS_TIMEOUT_MS || '30000', 10);
+const BROWSERLESS_WAIT_UNTIL = process.env.BROWSERLESS_WAIT_UNTIL || 'networkidle2';
 
 /**
  * Scrapes price data using the browserless npm package.
@@ -28,7 +30,7 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
     
     // Here we create a browserless browser instance with sensible defaults matching the README
     const browser = createBrowser({
-        timeout: 30000,
+        timeout: BROWSERLESS_TIMEOUT_MS,
         lossyDeviceName: true,
         ignoreHTTPSErrors: true
     });
@@ -42,19 +44,13 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
         // Here we create a browser context (like opening a new tab)
         browserless = await browser.createContext({ retry: 2 });
         
-        // Here we use the evaluate method to run custom extraction logic
-        const extractData = browserless.evaluate(async (page: any) => {
-            // Check for challenge page
-            const pageTitle = await page.title();
-            const bodyText = await page.evaluate(() => document.body.innerText.substring(0, 1000));
-            
-            // Extract headers
-            const headerElements = await page.$$('th');
-            const headers: string[] = [];
-            for (const th of headerElements) {
-                const text = await page.evaluate((el: any) => el.textContent?.trim() || '', th);
-                if (text) headers.push(text);
-            }
+        // Here we use withPage + goto pattern to avoid closure capture issues
+        const extractData = browserless.withPage((page: any, goto: any) => async (opts: any) => {
+            await goto(page, {
+                url: opts.url,
+                waitUntil: BROWSERLESS_WAIT_UNTIL as any,
+                timeout: BROWSERLESS_TIMEOUT_MS
+            });
             
             // Wait for the table rows to appear
             try {
@@ -64,8 +60,8 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
             }
             
             // Extract data from the table rows
-            const rawRows = await page.$$eval(rowSelector, (rows: Element[]) => {
-                return rows.map(row => {
+            const rawData = await page.$$eval(rowSelector, (rows: Element[]) => {
+                return rows.map((row: any) => {
                     const nameEl = row.querySelector('h4') || row.querySelector('a.font-semibold');
                     const name = nameEl?.textContent?.trim();
                     
@@ -87,52 +83,10 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
                 }).filter((item: any) => item !== null);
             });
             
-            return {
-                pageTitle,
-                bodyText,
-                headers,
-                rows: rawRows,
-            };
-        }, { 
-            waitUntil: 'networkidle2',
-            timeout: 30000
-        });
+            return rawData;
+        }, { timeout: BROWSERLESS_TIMEOUT_MS });
         
-        const extractedData = await extractData(config.targetUrl);
-        
-        // Check for challenge page
-        const challengeResult = detectChallengePage({
-            url: config.targetUrl,
-            title: extractedData.pageTitle,
-            bodyText: extractedData.bodyText,
-        });
-        
-        if (challengeResult.isBlocked) {
-            log.warning(
-                `[Browserless/${config.category}/${config.region}] Challenge page detected: ${challengeResult.reasons.join(', ')}`
-            );
-            return [];
-        }
-        
-        log.info(`[Browserless/${config.category}/${config.region}] Extracted ${extractedData.rows.length} raw rows`);
-        
-        if (extractedData.rows.length === 0) {
-            return [];
-        }
-        
-        // Normalize the raw data using header mapping
-        const includeTrace = process.env.STORE_RAW_TRACE === '1';
-        const normalizedRecords = normalizeTableData(
-            {
-                url: config.targetUrl,
-                scrapedAt: new Date().toISOString(),
-                headers: extractedData.headers,
-                rows: extractedData.rows,
-            },
-            config.category,
-            config.region,
-            includeTrace
-        );
+        const rawData = await extractData({ url: config.targetUrl });
         
         // Validate records
         const validRecords = validateRecords(normalizedRecords, config.category, config.region);

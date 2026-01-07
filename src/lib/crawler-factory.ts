@@ -22,8 +22,24 @@ export interface CrawlerInstance {
 
 const DEFAULT_ROW_SELECTOR = '.datatable-v2_row__hkEus';
 const DEFAULT_POLL_INTERVAL = 30000;
-const MAX_RETRIES = 3;
-const RETRY_DELAY_BASE = 5000;
+
+// Environment-configurable parameters
+const MAX_RETRIES = parseInt(process.env.CRAWLER_MAX_RETRIES || '3', 10);
+const RETRY_DELAY_BASE_MS = parseInt(process.env.CRAWLER_RETRY_DELAY_BASE_MS || '5000', 10);
+const PLAYWRIGHT_TIMEOUT_MS = parseInt(process.env.PLAYWRIGHT_TIMEOUT_MS || '30000', 10);
+const NO_DATA_BACKOFF_MS = parseInt(process.env.NO_DATA_BACKOFF_MS || '300000', 10);
+
+// Helper for AbortSignal-aware sleep
+async function sleep(ms: number, signal?: AbortSignal): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(resolve, ms);
+        const abortHandler = () => {
+            clearTimeout(timeout);
+            reject(new Error('Aborted'));
+        };
+        signal?.addEventListener('abort', abortHandler, { once: true });
+    });
+}
 
 export function createCrawler(config: CrawlerConfig): CrawlerInstance {
     const POLL_INTERVAL_MS = config.pollIntervalMs || DEFAULT_POLL_INTERVAL;
@@ -31,6 +47,7 @@ export function createCrawler(config: CrawlerConfig): CrawlerInstance {
 
     let isRunning = false;
     let abortController: AbortController | null = null;
+    let storedCountThisRun = 0;
 
     // Here we configure the Playwright crawler to handle the scraping logic
     const crawler = new PlaywrightCrawler({
@@ -113,30 +130,7 @@ export function createCrawler(config: CrawlerConfig): CrawlerInstance {
 
             if (rawTableData.rows.length === 0) {
                 log.warning(`[${config.category}/${config.region}] No data extracted`);
-                config.onDataStored?.(0);
-                return;
-            }
-
-            // Normalize the raw data using header mapping
-            const includeTrace = process.env.STORE_RAW_TRACE === '1';
-            const normalizedRecords = normalizeTableData(
-                {
-                    url: request.url,
-                    scrapedAt: new Date().toISOString(),
-                    headers: rawTableData.headers,
-                    rows: rawTableData.rows,
-                },
-                config.category,
-                config.region,
-                includeTrace
-            );
-
-            // Validate records
-            const validRecords = validateRecords(normalizedRecords, config.category, config.region);
-            
-            if (!meetsMinimumQuality(validRecords)) {
-                log.warning(`[${config.category}/${config.region}] No valid records after validation`);
-                config.onDataStored?.(0);
+                storedCountThisRun = 0;
                 return;
             }
 
@@ -150,21 +144,21 @@ export function createCrawler(config: CrawlerConfig): CrawlerInstance {
             const store = await getRedisStore(config.category);
             await store.push(recordsWithIds);
 
-            log.info(`[${config.category}/${config.region}] Stored ${recordsWithIds.length} records`);
-            config.onDataStored?.(recordsWithIds.length);
+            storedCountThisRun = records.length;
+            log.info(`[${config.category}/${config.region}] Stored ${records.length} records`);
+            config.onDataStored?.(records.length);
         },
 
         failedRequestHandler({ request }) {
             config.onStatusChange?.('error');
             log.error(`[${config.category}/${config.region}] Request failed: ${request.url}`);
+            storedCountThisRun = 0;
         },
     });
-
-    // Here we track if Playwright succeeded to determine if fallback is needed
-    let playwrightSucceeded = false;
-    const PLAYWRIGHT_TIMEOUT_MS = 30000; // 30 seconds max before falling back
     
     async function runWithRetry(retryCount = 0): Promise<void> {
+        storedCountThisRun = 0; // Reset counter for this run
+        
         try {
             const uniqueKey = `${config.targetUrl}-${Date.now()}`;
             
@@ -179,18 +173,31 @@ export function createCrawler(config: CrawlerConfig): CrawlerInstance {
             });
             
             await Promise.race([crawlerPromise, timeoutPromise]);
-            playwrightSucceeded = true;
+            
+            // Check if Playwright cycle was successful by verifying storedCountThisRun > 0
+            if (storedCountThisRun === 0) {
+                throw new Error('Playwright extracted 0 records - triggering fallback');
+            }
+            
+            log.info(`[${config.category}/${config.region}] Playwright cycle succeeded with ${storedCountThisRun} records`);
         } catch (error) {
-            if (retryCount < MAX_RETRIES) {
+            if (retryCount < MAX_RETRIES && storedCountThisRun === 0) {
                 // Here we calculate the exponential backoff delay
-                const delay = RETRY_DELAY_BASE * Math.pow(2, retryCount);
+                const delay = RETRY_DELAY_BASE_MS * Math.pow(2, retryCount);
                 log.warning(`[${config.category}/${config.region}] Retrying in ${delay}ms (attempt ${retryCount + 1}/${MAX_RETRIES})`);
-                await new Promise(resolve => setTimeout(resolve, delay));
+                
+                try {
+                    await sleep(delay, abortController?.signal);
+                } catch {
+                    // Aborted during sleep
+                    throw new Error('Aborted during retry backoff');
+                }
+                
                 return runWithRetry(retryCount + 1);
             }
             
-            // Here we fall back to Browserless when Playwright exhausts retries
-            log.warning(`[${config.category}/${config.region}] Playwright failed, falling back to Browserless...`);
+            // Here we fall back to Browserless when Playwright exhausts retries or stores 0 records
+            log.warning(`[${config.category}/${config.region}] Playwright failed (stored ${storedCountThisRun} records), falling back to Browserless...`);
             try {
                 const recordCount = await runBrowserlessScrape({
                     category: config.category,
@@ -200,14 +207,25 @@ export function createCrawler(config: CrawlerConfig): CrawlerInstance {
                     onStatusChange: config.onStatusChange,
                     onDataStored: config.onDataStored
                 });
+                
                 if (recordCount > 0) {
                     log.info(`[${config.category}/${config.region}] Browserless fallback succeeded with ${recordCount} records`);
                     return;
                 }
+                
+                // Both Playwright and Browserless returned 0 records
+                log.warning(`[${config.category}/${config.region}] Both Playwright and Browserless returned 0 records. Applying NO_DATA_BACKOFF_MS (${NO_DATA_BACKOFF_MS}ms)`);
+                
+                try {
+                    await sleep(NO_DATA_BACKOFF_MS, abortController?.signal);
+                } catch {
+                    // Aborted during no-data backoff
+                    return;
+                }
             } catch (browserlessError) {
                 log.error(`[${config.category}/${config.region}] Browserless fallback also failed: ${browserlessError}`);
+                throw error;
             }
-            throw error;
         }
     }
 
@@ -233,14 +251,13 @@ export function createCrawler(config: CrawlerConfig): CrawlerInstance {
                 log.error(`[${config.category}/${config.region}] Fatal error: ${error}`);
             }
 
-            // Here we wait for the next scheduled run
-            await new Promise<void>((resolve) => {
-                const timeout = setTimeout(resolve, POLL_INTERVAL_MS);
-                abortController?.signal.addEventListener('abort', () => {
-                    clearTimeout(timeout);
-                    resolve();
-                });
-            });
+            // Here we wait for the next scheduled run with AbortSignal awareness
+            try {
+                await sleep(POLL_INTERVAL_MS, abortController?.signal);
+            } catch {
+                // Aborted, exit the loop
+                break;
+            }
         }
     }
 
