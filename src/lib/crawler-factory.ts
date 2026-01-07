@@ -1,6 +1,9 @@
 import { PlaywrightCrawler, log } from 'crawlee';
 import { getRedisStore, type DataRecord } from './redis-store.js';
 import { runBrowserlessScrape } from './browserless-crawler.js';
+import { normalizeTableData, type RawTableData } from './normalizer.js';
+import { detectChallengePage, validateRecords, meetsMinimumQuality } from './validator.js';
+import { generateRecordId } from './id-generator.js';
 
 export interface CrawlerConfig {
     category: string;
@@ -57,60 +60,89 @@ export function createCrawler(config: CrawlerConfig): CrawlerInstance {
             config.onStatusChange?.('scraping');
             log.info(`[${config.category}/${config.region}] Processing ${request.url}`);
 
+            // Check for challenge/blocked page
+            const pageTitle = await page.title();
+            const bodyText = await page.evaluate(() => document.body.innerText.substring(0, 1000));
+            
+            const challengeResult = detectChallengePage({
+                url: request.url,
+                title: pageTitle,
+                bodyText,
+            });
+            
+            if (challengeResult.isBlocked) {
+                log.warning(
+                    `[${config.category}/${config.region}] Challenge page detected: ${challengeResult.reasons.join(', ')}`
+                );
+                config.onDataStored?.(0);
+                return;
+            }
+
             try {
                 // Here we wait for the table to load on the page
                 await page.waitForSelector(ROW_SELECTOR, { timeout: 20000 });
             } catch (e) {
                 log.warning(`[${config.category}/${config.region}] Table not found. Page structure may have changed.`);
+                config.onDataStored?.(0);
                 return;
             }
 
-            // Here we extract price data from the table rows
-            const rawData = await page.$$eval(ROW_SELECTOR, (rows: Array<HTMLElement>) => {
-                return rows.map(row => {
+            // Extract raw table data (headers + rows)
+            const rawTableData = await page.evaluate((selector: string) => {
+                // Extract headers from table
+                const headerElements = document.querySelectorAll('th');
+                const headers: string[] = [];
+                headerElements.forEach(th => {
+                    const text = th.textContent?.trim() || '';
+                    if (text) headers.push(text);
+                });
+                
+                // Extract rows
+                const rows = document.querySelectorAll(selector);
+                const extractedRows: any[] = [];
+                
+                rows.forEach(row => {
                     const nameEl = row.querySelector('h4') || row.querySelector('a.font-semibold');
                     const name = nameEl?.textContent?.trim();
+                    
+                    if (!name) return; // Skip rows without names
+                    
+                    // Extract href if available
+                    const linkEl = row.querySelector('a[href]');
+                    const href = linkEl?.getAttribute('href') || undefined;
+                    
+                    // Extract all cell values
+                    const cells = Array.from(row.querySelectorAll('td'));
+                    const cellValues = cells.map(cell => cell.textContent?.trim() || '');
+                    
+                    extractedRows.push({
+                        name,
+                        href,
+                        cells: cellValues,
+                    });
+                });
+                
+                return {
+                    headers,
+                    rows: extractedRows,
+                };
+            }, ROW_SELECTOR);
 
-                    const cells = Array.from(row.querySelectorAll('td')) as Array<HTMLElement>;
-                    const price = cells[3]?.textContent?.trim();
-                    const open = cells[4]?.textContent?.trim();
-                    const high = cells[5]?.textContent?.trim();
-                    const low = cells[6]?.textContent?.trim();
-                    const change = cells[7]?.textContent?.trim();
-                    const changePct = cells[8]?.textContent?.trim();
-
-                    const timeEl = row.querySelector('time');
-                    const time = timeEl?.textContent?.trim();
-
-                    return { name, price, open, high, low, change, changePct, time };
-                }).filter((item: any) => item.name);
-            });
-
-            if (rawData.length === 0) {
+            if (rawTableData.rows.length === 0) {
                 log.warning(`[${config.category}/${config.region}] No data extracted`);
                 storedCountThisRun = 0;
                 return;
             }
 
-            // Here we format the extracted data into our standard record structure
-            const records: Omit<DataRecord, 'id'>[] = rawData.map(item => ({
-                name: item.name || 'Unknown',
-                region: config.region,
-                category: config.category,
-                last: item.price || '',
-                price: item.price,
-                open: item.open,
-                high: item.high,
-                low: item.low,
-                change: item.change,
-                changePct: item.changePct,
-                time: item.time,
-                scrapedAt: new Date().toISOString()
+            // Add IDs to records
+            const recordsWithIds: DataRecord[] = validRecords.map(record => ({
+                id: generateRecordId(record.name, record.region, (record as any).href),
+                ...record,
             }));
 
             // Here we save the records to our Redis store (with JSON fallback)
             const store = await getRedisStore(config.category);
-            await store.push(records);
+            await store.push(recordsWithIds);
 
             storedCountThisRun = records.length;
             log.info(`[${config.category}/${config.region}] Stored ${records.length} records`);

@@ -167,7 +167,7 @@ export class RedisStore {
      * After storing, we publish the new records to the Pub/Sub channel.
      * If Redis is unavailable, we fall back to JSON file storage.
      */
-    async push(items: Omit<DataRecord, 'id'>[]): Promise<void> {
+    async push(items: Omit<DataRecord, 'id'>[] | DataRecord[]): Promise<void> {
         if (this.isAvailable && this.redis) {
             try {
                 await this.pushToRedis(items);
@@ -180,17 +180,20 @@ export class RedisStore {
 
         // Fallback to JSON storage
         await this.initJsonFallback();
-        await this.jsonFallback!.push(items);
+        await this.jsonFallback!.push(items as Omit<DataRecord, 'id'>[]);
     }
 
     /**
      * Internal method to push records to Redis.
      */
-    private async pushToRedis(items: Omit<DataRecord, 'id'>[]): Promise<void> {
+    private async pushToRedis(items: Omit<DataRecord, 'id'>[] | DataRecord[]): Promise<void> {
         const pipeline = this.redis!.pipeline();
 
-        // Build records with IDs
+        // Build records with IDs (if not already present)
         const records: DataRecord[] = items.map(item => {
+            if ('id' in item && item.id) {
+                return item as DataRecord;
+            }
             const id = `${item.name?.replace(/\s+/g, '-').toLowerCase()}-${item.region}`;
             return { id, ...item } as DataRecord;
         });
