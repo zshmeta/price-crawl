@@ -1,0 +1,35 @@
+{
+  "requestsFinished": 0,
+  "requestsFailed": 0,
+  "requestsRetries": 0,
+  "requestsFailedPerMinute": 0,
+  "requestsFinishedPerMinute": 0,
+  "requestMinDurationMillis": null,
+  "requestMaxDurationMillis": 0,
+  "requestTotalFailedDurationMillis": 0,
+  "requestTotalFinishedDurationMillis": 0,
+  "crawlerStartedAt": "2026-01-07T00:59:54.892Z",
+  "crawlerFinishedAt": null,
+  "statsPersistedAt": "2026-01-07T01:00:49.720Z",
+  "crawlerRuntimeMillis": 61071,
+  "crawlerLastStartTimestamp": 1767747588649,
+  "requestRetryHistogram": [],
+  "statsId": 3,
+  "requestAvgFailedDurationMillis": null,
+  "requestAvgFinishedDurationMillis": null,
+  "requestTotalDurationMillis": 0,
+  "requestsTotal": 0,
+  "requestsWithStatusCode": {},
+  "errors": {},
+  "retryErrors": {
+    "/home/zshmeta/price-crawl/node_modules/@crawlee/src/crawlers/crawler_utils.ts:13:11": {
+      "missing error code": {
+        "Error": {
+          "Navigation timed out after 30 seconds.": {
+            "count": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "url": "https://www.investing.com/equities/united-states",
+  "title": "Just a moment...",
+  "indicators": {
+    "hasChallengeTitle": true,
+    "hasChallengeScript": true,
+    "hasRayId": false,
+    "hasTurnstile": true
+  }
+}

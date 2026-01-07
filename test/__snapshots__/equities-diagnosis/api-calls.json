@@ -1,0 +1,12 @@
+[
+  {
+    "url": "https://www.investing.com/equities/united-states",
+    "method": "GET",
+    "status": 403
+  },
+  {
+    "url": "https://challenges.cloudflare.com/turnstile/v0/b/88d68f5d5ea3/api.js?onload=CMOv5&render=explicit",
+    "method": "GET",
+    "status": 200
+  }
+]

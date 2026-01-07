@@ -1,0 +1,332 @@
+{
+  "category": "commodities",
+  "region": "global",
+  "url": "https://www.investing.com/commodities/real-time-futures",
+  "scrapedAt": "2026-01-07T05:22:54.875Z",
+  "headers": [
+    {
+      "index": 0,
+      "text": "",
+      "className": "datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq hidden w-8 md:table-cell !py-2"
+    },
+    {
+      "index": 1,
+      "text": "Name",
+      "className": "datatable-v2_cell__IwP1U datatable-v2_cell--align-start__beGpn dynamic-table-v2_col-name__Xhsxv dynamic-table-v2_col-name-h__gix_M dynamic-table-v2_header-cell__vhndq !py-2"
+    },
+    {
+      "index": 2,
+      "text": "Month",
+      "className": "datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq"
+    },
+    {
+      "index": 3,
+      "text": "Last",
+      "className": "datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq text-right rtl:text-right"
+    },
+    {
+      "index": 4,
+      "text": "High",
+      "className": "datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq text-right rtl:text-right"
+    },
+    {
+      "index": 5,
+      "text": "Low",
+      "className": "datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq text-right rtl:text-right"
+    },
+    {
+      "index": 6,
+      "text": "Chg.",
+      "className": "datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq text-right rtl:text-right"
+    },
+    {
+      "index": 7,
+      "text": "Chg. %",
+      "className": "datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq text-right rtl:text-right"
+    },
+    {
+      "index": 8,
+      "text": "Time",
+      "className": "datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq text-right rtl:text-right"
+    },
+    {
+      "index": 9,
+      "text": "Name",
+      "className": "pb-3 pl-2 pt-0 text-left font-semibold"
+    },
+    {
+      "index": 10,
+      "text": "Last",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 11,
+      "text": "Chg. %",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 12,
+      "text": "Vol.",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 13,
+      "text": "",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-center font-semibold"
+    },
+    {
+      "index": 14,
+      "text": "Name",
+      "className": "pb-3 pl-2 pt-0 text-left font-semibold"
+    },
+    {
+      "index": 15,
+      "text": "Last",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 16,
+      "text": "Chg. %",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 17,
+      "text": "Vol.",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 18,
+      "text": "",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-center font-semibold"
+    },
+    {
+      "index": 19,
+      "text": "Name",
+      "className": "pb-3 pl-2 pt-0 text-left font-semibold"
+    },
+    {
+      "index": 20,
+      "text": "Last",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 21,
+      "text": "Chg. %",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 22,
+      "text": "Vol.",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 23,
+      "text": "",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-center font-semibold"
+    },
+    {
+      "index": 24,
+      "text": "Name",
+      "className": "pb-3 pl-2 pt-0 text-left font-semibold"
+    },
+    {
+      "index": 25,
+      "text": "Last",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 26,
+      "text": "Chg. %",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 27,
+      "text": "Vol.",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-right font-semibold rtl:text-right"
+    },
+    {
+      "index": 28,
+      "text": "",
+      "className": "whitespace-nowrap pb-3 pl-2 pt-0 text-center font-semibold"
+    }
+  ],
+  "rowSelector": ".datatable-v2_row__hkEus",
+  "rowCount": 35,
+  "sampleRows": [
+    {
+      "rowIndex": 0,
+      "cellCount": 0,
+      "cells": [],
+      "nameElement": {
+        "found": false
+      },
+      "symbolElement": {
+        "found": false
+      },
+      "timeElement": {
+        "found": false
+      },
+      "fullRowHTML": "<th class=\"datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq hidden w-8 md:table-cell !py-2\"><div class=\"datatable-v2_cell__wrapper__7O0wk\"><span class=\"dynamic-table-v2_ellipse__9zm_e\" title=\"\"><label class=\"flex cursor-pointer items-center\"><input type=\"checkbox\" class=\"hidden\" value=\"all\"><div class=\"border-color-[#d9dcdf] h-4 w-4 shrink-0 rounded-sm border-x border-y checkbox_emptyCheckbox__5Wxn0\"></div><span class=\"ml-3.5 text-sm leading-5 text-[#232526]\"></span></label></span></div></th><th class=\"datatable-v2_cell__IwP1U datatable-v2_cell--align-start__beGpn dynamic-table-v2_col-name__Xhsxv dynamic-table-v2_col-name-h__gix_M dynamic-table-v2_header-cell__vhndq !py-2\"><div class=\"datatable-v2_cell__wrapper__7O0wk\"><button class=\"relative inline-flex items-center justify-center whitespace-nowrap rounded-sm p-1.5 text-xs font-bold leading-tight no-underline disabled:bg-inv-grey-50 disabled:text-inv-grey-400 text-inv-grey-700 datatable-v2_sort__oHEK5 !font-semibold !leading-4 text-primary\" type=\"button\"><span>Name</span><span class=\"flex\"><svg viewBox=\"0 0 14 14\" width=\"14\" fill=\"none\" class=\"datatable-v2_sort-icon__lTndM datatable-v2_sort-icon-up__hKaZQ !hidden\" aria-hidden=\"true\" height=\"14\" style=\"height:auto\"><path fill=\"currentColor\" d=\"M10.627 4.66675C11.0463 4.66675 11.2793 5.15171 11.0174 5.4791L7.39109 10.012C7.19092 10.2622 6.81038 10.2622 6.61022 10.012L2.98386 5.4791C2.72196 5.15171 2.95504 4.66675 3.3743 4.66675H10.627Z\"></path></svg><svg viewBox=\"0 0 14 14\" width=\"14\" fill=\"none\" class=\"datatable-v2_sort-icon__lTndM opacity-40\" aria-hidden=\"true\" height=\"14\" style=\"height:auto\"><path fill=\"currentColor\" d=\"M10.627 4.66675C11.0463 4.66675 11.2793 5.15171 11.0174 5.4791L7.39109 10.012C7.19092 10.2622 6.81038 10.2622 6.61022 10.012L2.98386 5.4791C2.72196 5.15171 2.95504 4.66675 3.3743 4.66675H10.627Z\"></path></svg></span></button></div></th><th class=\"datatable-v2_cell__IwP1U dynamic-table-v2_header-cell__vhndq\"><div class=\"datatable-v2_cell"
+    },
+    {
+      "rowIndex": 1,
+      "cellCount": 9,
+      "cells": [
+        {
+          "index": 0,
+          "text": "",
+          "innerHTML": "<div class=\"flex\"><label class=\"flex cursor-pointer items-center\"><input type=\"checkbox\" class=\"hidden\" value=\"Gold\"><div class=\"border-color-[#d9dcdf] h-4 w-4 shrink-0 rounded-sm border-x border-y checkbox_emptyCheckbox__5Wxn0\"></div><span class=\"ml-3.5 text-sm leading-5 text-[#232526]\"></span></label></div>",
+          "links": []
+        },
+        {
+          "index": 1,
+          "text": "Gold derived",
+          "innerHTML": "<div class=\"datatable-v2_cell__wrapper__7O0wk dynamic-table-v2_desktopFreezeColumnWidth__BKzCe\"><a class=\"overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-primary hover:text-link\" title=\"Gold - (CFD)\" target=\"_self\" href=\"https://www.investing.com/commodities/gold\"><h4><span class=\"flex align-middle\"><span class=\"block\"><span data-test=\"flag-gold\" class=\"flag_flag__gUPtc flag_flag--gold__3Bxcm dynamic-table-v2_flag-icon__Dux2D\" role=\"img\" aria-label=\"\" title=\"\"></span></span><s",
+          "links": [
+            {
+              "text": "Gold",
+              "href": "https://www.investing.com/commodities/gold"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "Feb 26",
+          "innerHTML": "Feb 26",
+          "links": []
+        },
+        {
+          "index": 3,
+          "text": "4,478.95",
+          "innerHTML": "<span class=\"\">4,478.95</span>",
+          "links": []
+        },
+        {
+          "index": 4,
+          "text": "4,512.10",
+          "innerHTML": "4,512.10",
+          "links": []
+        },
+        {
+          "index": 5,
+          "text": "4,470.45",
+          "innerHTML": "4,470.45",
+          "links": []
+        },
+        {
+          "index": 6,
+          "text": "-17.15",
+          "innerHTML": "-17.15",
+          "links": []
+        },
+        {
+          "index": 7,
+          "text": "-0.38%",
+          "innerHTML": "-0.38%",
+          "links": []
+        },
+        {
+          "index": 8,
+          "text": "00:21:10",
+          "innerHTML": "<span class=\"flex items-center justify-end gap-4\"><span class=\"dynamic-table-v2_timeWrapper__oOtpE\"><time datetime=\"00:21:10\">00:21:10</time></span><svg viewBox=\"0 0 14 14\" class=\"w-3.5 text-market-open\"><use href=\"/next_/icon.svg?v=31a6c86#clock\"></use></svg></span>",
+          "links": []
+        }
+      ],
+      "nameElement": {
+        "found": true,
+        "tag": "H4",
+        "text": "Gold",
+        "className": ""
+      },
+      "symbolElement": {
+        "found": false
+      },
+      "timeElement": {
+        "found": true,
+        "text": "00:21:10",
+        "datetime": "00:21:10"
+      },
+      "fullRowHTML": "<td class=\"datatable-v2_cell__IwP1U hidden md:table-cell !py-2\"><div class=\"flex\"><label class=\"flex cursor-pointer items-center\"><input type=\"checkbox\" class=\"hidden\" value=\"Gold\"><div class=\"border-color-[#d9dcdf] h-4 w-4 shrink-0 rounded-sm border-x border-y checkbox_emptyCheckbox__5Wxn0\"></div><span class=\"ml-3.5 text-sm leading-5 text-[#232526]\"></span></label></div></td><td class=\"datatable-v2_cell__IwP1U !h-auto w-full py-2 mdMax:border-r dynamic-table-v2_col-name__Xhsxv !py-2\"><div class=\"datatable-v2_cell__wrapper__7O0wk dynamic-table-v2_desktopFreezeColumnWidth__BKzCe\"><a class=\"overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-primary hover:text-link\" title=\"Gold - (CFD)\" target=\"_self\" href=\"https://www.investing.com/commodities/gold\"><h4><span class=\"flex align-middle\"><span class=\"block\"><span data-test=\"flag-gold\" class=\"flag_flag__gUPtc flag_flag--gold__3Bxcm dynamic-table-v2_flag-icon__Dux2D\" role=\"img\" aria-label=\"\" title=\"\"></span></span><span class=\"block overflow-hidden text-ellipsis whitespace-nowrap\" dir=\"ltr\">Gold</span></span> </h4></a><span class=\"datatable-v2_cell--name__derived__L4iTy md:hidden\">derived</span></div></td><td class=\"datatable-v2_cell__IwP1U\">Feb 26</td><td class=\"datatable-v2_cell__IwP1U dynamic-table-v2_col-other__zNU4A text-right rtl:!text-right\" style=\"--cell-display:block;--cell-positions:last\"><span class=\"\">4,478.95</span></td><td class=\"datatable-v2_cell__IwP1U dynamic-table-v2_col-other__zNU4A text-right rtl:text-right\">4,512.10</td><td class=\"datatable-v2_cell__IwP1U dynamic-table-v2_col-other__zNU4A text-right rtl:text-right\">4,470.45</td><td class=\"datatable-v2_cell__IwP1U datatable-v2_cell--down__sYmZ4 datatable-v2_cell--bold__cXQUV text-right font-bold rtl:text-right mdMax:text-xs\" dir=\"ltr\" style=\"--cell-display:flex;--cell-positions:chg\">-17.15</td><td class=\"datatable-v2_cell__IwP1U datatable-v2_cell--down__sYmZ4 datatable-v2_cell--bold__cXQUV dynamic-table-v2_col-other__zNU4A text-right fon"
+    },
+    {
+      "rowIndex": 2,
+      "cellCount": 9,
+      "cells": [
+        {
+          "index": 0,
+          "text": "",
+          "innerHTML": "<div class=\"flex\"><label class=\"flex cursor-pointer items-center\"><input type=\"checkbox\" class=\"hidden\" value=\"XAU/USD\"><div class=\"border-color-[#d9dcdf] h-4 w-4 shrink-0 rounded-sm border-x border-y checkbox_emptyCheckbox__5Wxn0\"></div><span class=\"ml-3.5 text-sm leading-5 text-[#232526]\"></span></label></div>",
+          "links": []
+        },
+        {
+          "index": 1,
+          "text": "XAU/USD",
+          "innerHTML": "<div class=\"datatable-v2_cell__wrapper__7O0wk dynamic-table-v2_desktopFreezeColumnWidth__BKzCe\"><a class=\"overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-primary hover:text-link\" title=\"XAU/USD\" target=\"_self\" href=\"https://www.investing.com/currencies/xau-usd\"><h4><span class=\"flex align-middle\"><span class=\"block\"><span data-test=\"flag-gold\" class=\"flag_flag__gUPtc flag_flag--gold__3Bxcm dynamic-table-v2_flag-icon__Dux2D\" role=\"img\" aria-label=\"\" title=\"\"></span></span><span",
+          "links": [
+            {
+              "text": "XAU/USD",
+              "href": "https://www.investing.com/currencies/xau-usd"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "",
+          "innerHTML": "",
+          "links": []
+        },
+        {
+          "index": 3,
+          "text": "4,468.33",
+          "innerHTML": "<span class=\"\">4,468.33</span>",
+          "links": []
+        },
+        {
+          "index": 4,
+          "text": "4,500.50",
+          "innerHTML": "4,500.50",
+          "links": []
+        },
+        {
+          "index": 5,
+          "text": "4,459.67",
+          "innerHTML": "4,459.67",
+          "links": []
+        },
+        {
+          "index": 6,
+          "text": "-26.76",
+          "innerHTML": "-26.76",
+          "links": []
+        },
+        {
+          "index": 7,
+          "text": "-0.60%",
+          "innerHTML": "-0.60%",
+          "links": []
+        },
+        {
+          "index": 8,
+          "text": "00:20:28",
+          "innerHTML": "<span class=\"flex items-center justify-end gap-4\"><span class=\"dynamic-table-v2_timeWrapper__oOtpE\"><time datetime=\"00:20:28\">00:20:28</time></span><svg viewBox=\"0 0 14 14\" class=\"w-3.5 text-market-open\"><use href=\"/next_/icon.svg?v=31a6c86#clock\"></use></svg></span>",
+          "links": []
+        }
+      ],
+      "nameElement": {
+        "found": true,
+        "tag": "H4",
+        "text": "XAU/USD",
+        "className": ""
+      },
+      "symbolElement": {
+        "found": false
+      },
+      "timeElement": {
+        "found": true,
+        "text": "00:20:28",
+        "datetime": "00:20:28"
+      },
+      "fullRowHTML": "<td class=\"datatable-v2_cell__IwP1U hidden md:table-cell !py-2\"><div class=\"flex\"><label class=\"flex cursor-pointer items-center\"><input type=\"checkbox\" class=\"hidden\" value=\"XAU/USD\"><div class=\"border-color-[#d9dcdf] h-4 w-4 shrink-0 rounded-sm border-x border-y checkbox_emptyCheckbox__5Wxn0\"></div><span class=\"ml-3.5 text-sm leading-5 text-[#232526]\"></span></label></div></td><td class=\"datatable-v2_cell__IwP1U !h-auto w-full py-2 mdMax:border-r dynamic-table-v2_col-name__Xhsxv !py-2\"><div class=\"datatable-v2_cell__wrapper__7O0wk dynamic-table-v2_desktopFreezeColumnWidth__BKzCe\"><a class=\"overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-primary hover:text-link\" title=\"XAU/USD\" target=\"_self\" href=\"https://www.investing.com/currencies/xau-usd\"><h4><span class=\"flex align-middle\"><span class=\"block\"><span data-test=\"flag-gold\" class=\"flag_flag__gUPtc flag_flag--gold__3Bxcm dynamic-table-v2_flag-icon__Dux2D\" role=\"img\" aria-label=\"\" title=\"\"></span></span><span class=\"block overflow-hidden text-ellipsis whitespace-nowrap\" dir=\"ltr\">XAU/USD</span></span> </h4></a></div></td><td class=\"datatable-v2_cell__IwP1U\"></td><td class=\"datatable-v2_cell__IwP1U dynamic-table-v2_col-other__zNU4A text-right rtl:!text-right\" style=\"--cell-display:block;--cell-positions:last\"><span class=\"\">4,468.33</span></td><td class=\"datatable-v2_cell__IwP1U dynamic-table-v2_col-other__zNU4A text-right rtl:text-right\">4,500.50</td><td class=\"datatable-v2_cell__IwP1U dynamic-table-v2_col-other__zNU4A text-right rtl:text-right\">4,459.67</td><td class=\"datatable-v2_cell__IwP1U datatable-v2_cell--down__sYmZ4 datatable-v2_cell--bold__cXQUV text-right font-bold rtl:text-right mdMax:text-xs\" dir=\"ltr\" style=\"--cell-display:flex;--cell-positions:chg\">-26.76</td><td class=\"datatable-v2_cell__IwP1U datatable-v2_cell--down__sYmZ4 datatable-v2_cell--bold__cXQUV dynamic-table-v2_col-other__zNU4A text-right font-bold rtl:text-right\" dir=\"ltr\" style=\"--cell-display:flex;--cell-positions:chg-"
+    }
+  ]
+}

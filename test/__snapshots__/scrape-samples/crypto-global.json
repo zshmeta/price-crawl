@@ -1,0 +1,10 @@
+{
+  "category": "crypto",
+  "region": "global",
+  "url": "https://www.investing.com/crypto/currencies",
+  "scrapedAt": "2026-01-07T05:22:12.743Z",
+  "headers": [],
+  "rowSelector": ".datatable-v2_row__hkEus",
+  "rowCount": 0,
+  "sampleRows": []
+}

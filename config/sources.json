@@ -1,0 +1,36 @@
+{
+    "equities": {
+        "baseUrl": "https://www.investing.com/equities",
+        "regions": [
+            "united-states",
+            "france",
+            "australia"
+        ],
+        "pollIntervalMs": 30000
+    },
+    "crypto": {
+        "baseUrl": "https://www.investing.com/crypto/currencies",
+        "regions": [
+            "global"
+        ],
+        "pollIntervalMs": 15000
+    },
+    "forex": {
+        "baseUrl": "https://www.investing.com/currencies/single-currency-crosses",
+        "regions": [
+            "global"
+        ],
+        "pollIntervalMs": 10000
+    },
+    "commodities": {
+        "baseUrl": "https://www.investing.com/commodities/real-time-futures",
+        "regions": [
+            "global",
+            "energy",
+            "metals",
+            "grains",
+            "softs"
+        ],
+        "pollIntervalMs": 30000
+    }
+}

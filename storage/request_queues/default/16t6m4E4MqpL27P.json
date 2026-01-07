@@ -1,0 +1,9 @@
+{
+	"id": "16t6m4E4MqpL27P",
+	"json": "{\"id\":\"16t6m4E4MqpL27P\",\"url\":\"https://www.investing.com/equities/france\",\"loadedUrl\":\"https://www.investing.com/equities/france\",\"uniqueKey\":\"https://www.investing.com/equities/france-1767747590507\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-07T00:59:59.821Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://www.investing.com/equities/france-1767747590507",
+	"url": "https://www.investing.com/equities/france"
+}

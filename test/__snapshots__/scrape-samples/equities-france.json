@@ -1,0 +1,10 @@
+{
+  "category": "equities",
+  "region": "france",
+  "url": "https://www.investing.com/equities/france",
+  "scrapedAt": "2026-01-07T05:21:06.290Z",
+  "headers": [],
+  "rowSelector": ".datatable-v2_row__hkEus",
+  "rowCount": 0,
+  "sampleRows": []
+}

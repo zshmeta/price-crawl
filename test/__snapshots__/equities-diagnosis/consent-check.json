@@ -1,0 +1,10 @@
+{
+  "url": "https://www.investing.com/equities/united-states",
+  "consentResults": {
+    "genericModal": false,
+    "onetrust": false,
+    "cookiebot": false,
+    "gdprBanner": false,
+    "acceptButton": false
+  }
+}

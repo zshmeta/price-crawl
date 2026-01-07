@@ -1,0 +1,38 @@
+{
+  "name": "price-crawl",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "description": "financial data crawler ",
+  "scripts": {
+    "start": "tsx src/app.ts",
+    "dev": "tsx watch src/app.ts",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run"
+  },
+  "devDependencies": {
+    "@types/ioredis": "^4.28.10",
+    "@types/lodash": "^4.17.21",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.7",
+    "@vitest/ui": "latest",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vite": "latest",
+    "vitest": "latest"
+  },
+  "dependencies": {
+    "browserless": "^10.9.15",
+    "crawlee": "^3.15.3",
+    "ink": "^6.6.0",
+    "playwright": "^1.57.0",
+    "puppeteer": "^24.34.0",
+    "puppeteer-core": "^24.34.0",
+    "react": "^19.2.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
