@@ -1,5 +1,8 @@
 import { log } from 'crawlee';
 import { getRedisStore, type DataRecord } from './redis-store.js';
+import { normalizeTableData } from './normalizer.js';
+import { detectChallengePage, validateRecords, meetsMinimumQuality } from './validator.js';
+import { generateRecordId } from './id-generator.js';
 
 export interface BrowserlessConfig {
     category: string;
@@ -20,7 +23,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const createBrowser = require('browserless');
 
-export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<Omit<DataRecord, 'id'>[]> {
+export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<DataRecord[]> {
     const rowSelector = config.rowSelector || DEFAULT_ROW_SELECTOR;
     
     // Here we create a browserless browser instance with sensible defaults matching the README
@@ -41,61 +44,111 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
         
         // Here we use the evaluate method to run custom extraction logic
         const extractData = browserless.evaluate(async (page: any) => {
+            // Check for challenge page
+            const pageTitle = await page.title();
+            const bodyText = await page.evaluate(() => document.body.innerText.substring(0, 1000));
+            
+            // Extract headers
+            const headerElements = await page.$$('th');
+            const headers: string[] = [];
+            for (const th of headerElements) {
+                const text = await page.evaluate((el: any) => el.textContent?.trim() || '', th);
+                if (text) headers.push(text);
+            }
+            
             // Wait for the table rows to appear
             try {
                 await page.waitForSelector(rowSelector, { timeout: 20000 });
             } catch {
-                return [];
+                return { pageTitle, bodyText, headers: [], rows: [] };
             }
             
             // Extract data from the table rows
-            const rawData = await page.$$eval(rowSelector, (rows: Element[]) => {
+            const rawRows = await page.$$eval(rowSelector, (rows: Element[]) => {
                 return rows.map(row => {
                     const nameEl = row.querySelector('h4') || row.querySelector('a.font-semibold');
                     const name = nameEl?.textContent?.trim();
                     
+                    if (!name) return null;
+                    
+                    // Extract href if available
+                    const linkEl = row.querySelector('a[href]');
+                    const href = linkEl?.getAttribute('href') || undefined;
+                    
+                    // Extract all cell values
                     const cells = Array.from(row.querySelectorAll('td'));
-                    const price = cells[3]?.textContent?.trim();
-                    const open = cells[4]?.textContent?.trim();
-                    const high = cells[5]?.textContent?.trim();
-                    const low = cells[6]?.textContent?.trim();
-                    const change = cells[7]?.textContent?.trim();
-                    const changePct = cells[8]?.textContent?.trim();
+                    const cellValues = cells.map(cell => cell.textContent?.trim() || '');
                     
-                    const timeEl = row.querySelector('time');
-                    const time = timeEl?.textContent?.trim();
-                    
-                    return { name, price, open, high, low, change, changePct, time };
-                }).filter((item: any) => item.name);
+                    return {
+                        name,
+                        href,
+                        cells: cellValues,
+                    };
+                }).filter((item: any) => item !== null);
             });
             
-            return rawData;
+            return {
+                pageTitle,
+                bodyText,
+                headers,
+                rows: rawRows,
+            };
         }, { 
             waitUntil: 'networkidle2',
             timeout: 30000
         });
         
-        const rawData = await extractData(config.targetUrl);
+        const extractedData = await extractData(config.targetUrl);
         
-        log.info(`[Browserless/${config.category}/${config.region}] Extracted ${rawData.length} records`);
+        // Check for challenge page
+        const challengeResult = detectChallengePage({
+            url: config.targetUrl,
+            title: extractedData.pageTitle,
+            bodyText: extractedData.bodyText,
+        });
         
-        // Here we format data to match existing DataRecord schema
-        const records: Omit<DataRecord, 'id'>[] = rawData.map((item: any) => ({
-            name: item.name || 'Unknown',
-            region: config.region,
-            category: config.category,
-            last: item.price || '',
-            price: item.price,
-            open: item.open,
-            high: item.high,
-            low: item.low,
-            change: item.change,
-            changePct: item.changePct,
-            time: item.time,
-            scrapedAt: new Date().toISOString()
+        if (challengeResult.isBlocked) {
+            log.warning(
+                `[Browserless/${config.category}/${config.region}] Challenge page detected: ${challengeResult.reasons.join(', ')}`
+            );
+            return [];
+        }
+        
+        log.info(`[Browserless/${config.category}/${config.region}] Extracted ${extractedData.rows.length} raw rows`);
+        
+        if (extractedData.rows.length === 0) {
+            return [];
+        }
+        
+        // Normalize the raw data using header mapping
+        const includeTrace = process.env.STORE_RAW_TRACE === '1';
+        const normalizedRecords = normalizeTableData(
+            {
+                url: config.targetUrl,
+                scrapedAt: new Date().toISOString(),
+                headers: extractedData.headers,
+                rows: extractedData.rows,
+            },
+            config.category,
+            config.region,
+            includeTrace
+        );
+        
+        // Validate records
+        const validRecords = validateRecords(normalizedRecords, config.category, config.region);
+        
+        if (!meetsMinimumQuality(validRecords)) {
+            log.warning(`[Browserless/${config.category}/${config.region}] No valid records after validation`);
+            return [];
+        }
+        
+        // Add IDs to records
+        const recordsWithIds: DataRecord[] = validRecords.map(record => ({
+            id: generateRecordId(record.name, record.region, (record as any).href),
+            ...record,
         }));
         
-        return records;
+        return recordsWithIds;
         
     } catch (error) {
         log.error(`[Browserless/${config.category}/${config.region}] Error: ${error}`);
