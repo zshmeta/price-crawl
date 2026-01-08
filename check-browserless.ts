@@ -37,13 +37,21 @@ async function testBrowserless() {
             }
             
             const rows = await page.$$eval('.datatable-v2_row__hkEus', (els: any[]) => els.length);
+            const html = await page.content();
             console.log(`Found ${rows} rows`);
-            return { rowCount: rows };
+            return { rowCount: rows, html };
         });
         
         console.log(`Navigating to ${config.targetUrl}...`);
         const result = await extractData(config.targetUrl);
         console.log('Extraction result:', result);
+
+        if (result && result.html) {
+            console.log('Writing HTML dump to debug_browserless.html...');
+            const fs = await import('fs/promises');
+            await fs.writeFile('debug_browserless.html', result.html);
+            console.log('HTML dump saved.');
+        }
         
         console.log('Cleaning up...');
         await browserless.destroyContext();

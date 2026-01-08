@@ -1,8 +1,12 @@
 import { log } from 'crawlee';
 import { getRedisStore, type DataRecord } from './redis-store.js';
-import { normalizeTableData } from './normalizer.js';
-import { detectChallengePage, validateRecords, meetsMinimumQuality } from './validator.js';
+import { validateRecords, meetsMinimumQuality } from './validator.js';
 import { generateRecordId } from './id-generator.js';
+import { createRequire } from 'module';
+import fs from 'fs/promises';
+
+const require = createRequire(import.meta.url);
+const createBrowser = require('browserless');
 
 export interface BrowserlessConfig {
     category: string;
@@ -16,19 +20,16 @@ export interface BrowserlessConfig {
 const DEFAULT_ROW_SELECTOR = '.datatable-v2_row__hkEus';
 const BROWSERLESS_TIMEOUT_MS = parseInt(process.env.BROWSERLESS_TIMEOUT_MS || '30000', 10);
 const BROWSERLESS_WAIT_UNTIL = process.env.BROWSERLESS_WAIT_UNTIL || 'networkidle2';
+const DEBUG_HTML_DUMP = process.env.DEBUG_HTML_DUMP === 'true';
 
 /**
  * Scrapes price data using the browserless npm package.
  * This provides better anti-bot evasion than raw Playwright.
  */
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const createBrowser = require('browserless');
-
 export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<DataRecord[]> {
     const rowSelector = config.rowSelector || DEFAULT_ROW_SELECTOR;
     
-    // Here we create a browserless browser instance with sensible defaults matching the README
+    // Create a browserless factory instance
     const browser = createBrowser({
         timeout: BROWSERLESS_TIMEOUT_MS,
         lossyDeviceName: true,
@@ -41,26 +42,20 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
         log.info(`[Browserless/${config.category}/${config.region}] Starting scrape of ${config.targetUrl}`);
         config.onStatusChange?.('scraping');
         
-        // Here we create a browser context (like opening a new tab)
+        // Create a browser context
         browserless = await browser.createContext({ retry: 2 });
         
-        // Here we use withPage + goto pattern to avoid closure capture issues
-        const extractData = browserless.withPage((page: any, goto: any) => async (opts: any) => {
-            await goto(page, {
-                url: opts.url,
-                waitUntil: BROWSERLESS_WAIT_UNTIL as any,
-                timeout: BROWSERLESS_TIMEOUT_MS
-            });
-            
+        // Define the extraction function to be evaluated in the browser context
+        const extractData = browserless.evaluate(async (page: any, response: any) => {
             // Wait for the table rows to appear
             try {
                 await page.waitForSelector(rowSelector, { timeout: 20000 });
             } catch {
-                return { pageTitle, bodyText, headers: [], rows: [] };
+                return { headers: [], rows: [], html: await page.content() };
             }
             
             // Extract data from the table rows
-            const rawData = await page.$$eval(rowSelector, (rows: Element[]) => {
+            const rawData = await page.$$eval(rowSelector, (rows: any[]) => {
                 return rows.map((row: any) => {
                     const nameEl = row.querySelector('h4') || row.querySelector('a.font-semibold');
                     const name = nameEl?.textContent?.trim();
@@ -73,7 +68,7 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
                     
                     // Extract all cell values
                     const cells = Array.from(row.querySelectorAll('td'));
-                    const cellValues = cells.map(cell => cell.textContent?.trim() || '');
+                    const cellValues = cells.map((cell: any) => cell.textContent?.trim() || '');
                     
                     return {
                         name,
@@ -83,13 +78,41 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
                 }).filter((item: any) => item !== null);
             });
             
-            return rawData;
-        }, { timeout: BROWSERLESS_TIMEOUT_MS });
+            return { rows: rawData, html: await page.content() };
+        });
         
-        const rawData = await extractData({ url: config.targetUrl });
+        const result = await extractData(config.targetUrl);
+        const rawRows = result.rows || [];
+
+        if (DEBUG_HTML_DUMP && result.html) {
+             const filename = `debug_browserless_${config.category}_${config.region}.html`;
+             await fs.writeFile(filename, result.html);
+             log.warning(`[Browserless] Dumped HTML to ${filename}`);
+        }
+
+        if (rawRows.length === 0) {
+            return [];
+        }
+
+        const formattedRecords = rawRows.map((row: any) => ({
+            name: row.name,
+            region: config.region,
+            category: config.category,
+            // Map cells to fields based on assumption of column order
+            // This might need adjustment based on specific table layouts if they vary
+            last: row.cells[1],
+            open: row.cells[2],
+            high: row.cells[3],
+            low: row.cells[4],
+            change: row.cells[5],
+            changePct: row.cells[6],
+            time: row.cells[7],
+            scrapedAt: new Date().toISOString(),
+            href: row.href
+        }));
         
         // Validate records
-        const validRecords = validateRecords(normalizedRecords, config.category, config.region);
+        const validRecords = validateRecords(formattedRecords, config.category, config.region);
         
         if (!meetsMinimumQuality(validRecords)) {
             log.warning(`[Browserless/${config.category}/${config.region}] No valid records after validation`);
@@ -109,7 +132,6 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
         config.onStatusChange?.('error');
         throw error;
     } finally {
-        // Here we clean up resources
         if (browserless) {
             await browserless.destroyContext();
         }
@@ -128,7 +150,7 @@ export async function runBrowserlessScrape(config: BrowserlessConfig): Promise<n
         return 0;
     }
     
-    // Here we save records using the same Redis store as the main crawler
+    // Save records
     const store = await getRedisStore(config.category);
     await store.push(records);
     
