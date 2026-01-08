@@ -1,0 +1,9 @@
+{
+	"id": "Tvc5b9bC7OZI6Mr",
+	"json": "{\"id\":\"Tvc5b9bC7OZI6Mr\",\"url\":\"https://www.investing.com/crypto/currencies\",\"loadedUrl\":\"https://www.investing.com/crypto/currencies\",\"uniqueKey\":\"https://www.investing.com/crypto/currencies-1767899305475\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-08T19:08:40.308Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://www.investing.com/crypto/currencies-1767899305475",
+	"url": "https://www.investing.com/crypto/currencies"
+}

@@ -2,7 +2,7 @@
     "equities": {
         "baseUrl": "https://www.investing.com/equities",
         "regions": [
-            "united-states"
+            "france"
         ],
         "pollIntervalMs": 30000
     },

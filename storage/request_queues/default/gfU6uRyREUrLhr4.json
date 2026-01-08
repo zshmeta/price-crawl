@@ -1,0 +1,9 @@
+{
+	"id": "gfU6uRyREUrLhr4",
+	"json": "{\"id\":\"gfU6uRyREUrLhr4\",\"url\":\"https://www.investing.com/currencies/single-currency-crosses\",\"loadedUrl\":\"https://www.investing.com/currencies/single-currency-crosses\",\"uniqueKey\":\"https://www.investing.com/currencies/single-currency-crosses-1767899300596\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-08T19:08:27.450Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://www.investing.com/currencies/single-currency-crosses-1767899300596",
+	"url": "https://www.investing.com/currencies/single-currency-crosses"
+}

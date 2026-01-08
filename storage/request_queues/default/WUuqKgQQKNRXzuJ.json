@@ -1,9 +1,0 @@
-{
-	"id": "WUuqKgQQKNRXzuJ",
-	"json": "{\"id\":\"WUuqKgQQKNRXzuJ\",\"url\":\"https://www.investing.com/commodities/energy\",\"loadedUrl\":\"https://www.investing.com/commodities/energy\",\"uniqueKey\":\"https://www.investing.com/commodities/energy-1767898933494\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-01-08T19:02:44.051Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://www.investing.com/commodities/energy-1767898933494",
-	"url": "https://www.investing.com/commodities/energy"
-}

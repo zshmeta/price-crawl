@@ -1,37 +1,29 @@
 {
-  "requestsFinished": 0,
+  "requestsFinished": 1,
   "requestsFailed": 0,
   "requestsRetries": 0,
   "requestsFailedPerMinute": 0,
-  "requestsFinishedPerMinute": 0,
-  "requestMinDurationMillis": null,
-  "requestMaxDurationMillis": 0,
+  "requestsFinishedPerMinute": 3,
+  "requestMinDurationMillis": 6821,
+  "requestMaxDurationMillis": 6821,
   "requestTotalFailedDurationMillis": 0,
-  "requestTotalFinishedDurationMillis": 0,
-  "crawlerStartedAt": "2026-01-08T19:00:10.401Z",
-  "crawlerFinishedAt": "2026-01-08T19:00:44.067Z",
-  "statsPersistedAt": "2026-01-08T19:00:44.067Z",
-  "crawlerRuntimeMillis": 33682,
-  "crawlerLastStartTimestamp": 1767898810385,
-  "requestRetryHistogram": [],
+  "requestTotalFinishedDurationMillis": 6821,
+  "crawlerStartedAt": "2026-01-08T19:08:20.611Z",
+  "crawlerFinishedAt": null,
+  "statsPersistedAt": "2026-01-08T19:08:40.647Z",
+  "crawlerRuntimeMillis": 20048,
+  "crawlerLastStartTimestamp": 1767899300599,
+  "requestRetryHistogram": [
+    1
+  ],
   "statsId": 2,
   "requestAvgFailedDurationMillis": null,
-  "requestAvgFinishedDurationMillis": null,
-  "requestTotalDurationMillis": 0,
-  "requestsTotal": 0,
+  "requestAvgFinishedDurationMillis": 6821,
+  "requestTotalDurationMillis": 6821,
+  "requestsTotal": 1,
   "requestsWithStatusCode": {
     "200": 1
   },
   "errors": {},
-  "retryErrors": {
-    "/home/zshmeta/price-crawl/node_modules/@crawlee/src/resource-clients/common/base-client.ts:11:15": {
-      "missing error code": {
-        "Error": {
-          "Request queue with id: b4f22691-d2e2-4d89-a8b4-bf0336e71730 does not exist.": {
-            "count": 1
-          }
-        }
-      }
-    }
-  }
+  "retryErrors": {}
 }

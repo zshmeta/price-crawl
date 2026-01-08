@@ -1,0 +1,9 @@
+{
+	"id": "RfdCnPR8DczcppH",
+	"json": "{\"id\":\"RfdCnPR8DczcppH\",\"url\":\"https://www.investing.com/commodities/real-time-futures\",\"uniqueKey\":\"https://www.investing.com/commodities/real-time-futures-1767899320642\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{}}",
+	"method": "GET",
+	"orderNo": 1767899680672,
+	"retryCount": 0,
+	"uniqueKey": "https://www.investing.com/commodities/real-time-futures-1767899320642",
+	"url": "https://www.investing.com/commodities/real-time-futures"
+}

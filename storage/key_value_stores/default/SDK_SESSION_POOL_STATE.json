@@ -3,7 +3,7 @@
   "retiredSessionsCount": 0,
   "sessions": [
     {
-      "id": "session_8jbbfwekMd",
+      "id": "session_2vVEPXkRLI",
       "cookieJar": {
         "version": "tough-cookie@6.0.0",
         "storeType": "MemoryCookieStore",
@@ -16,14 +16,14 @@
       "userData": {},
       "maxErrorScore": 3,
       "errorScoreDecrement": 0.5,
-      "expiresAt": "2026-01-08T19:52:14.124Z",
-      "createdAt": "2026-01-08T19:02:14.124Z",
+      "expiresAt": "2026-01-08T19:58:20.651Z",
+      "createdAt": "2026-01-08T19:08:20.651Z",
       "usageCount": 0,
       "maxUsageCount": 50,
       "errorScore": 0
     },
     {
-      "id": "session_3r5ePez6VL",
+      "id": "session_3L55Yeg3EX",
       "cookieJar": {
         "version": "tough-cookie@6.0.0",
         "storeType": "MemoryCookieStore",
@@ -35,270 +35,270 @@
           {
             "key": "gcc",
             "value": "FR",
-            "expires": "2026-01-08T19:32:15.229Z",
+            "expires": "2026-01-08T19:38:20.959Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.304Z",
-            "lastAccessed": "2026-01-08T19:02:42.304Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "gsc",
             "value": "OCC",
-            "expires": "2026-01-08T19:32:15.229Z",
+            "expires": "2026-01-08T19:38:20.959Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.304Z",
-            "lastAccessed": "2026-01-08T19:02:42.304Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "udid",
-            "value": "825e3be7b6638f0f4d78a8f56cca019c",
-            "expires": "2027-01-08T19:02:15.229Z",
+            "value": "18f594d57feaf4a551407458d7a73d2b",
+            "expires": "2027-01-08T19:08:20.959Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.304Z",
-            "lastAccessed": "2026-01-08T19:02:42.304Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "inudid",
-            "value": "825e3be7b6638f0f4d78a8f56cca019c",
-            "expires": "2027-01-08T19:02:15.229Z",
+            "value": "18f594d57feaf4a551407458d7a73d2b",
+            "expires": "2027-01-08T19:08:20.959Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.304Z",
-            "lastAccessed": "2026-01-08T19:02:42.304Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "smd",
-            "value": "825e3be7b6638f0f4d78a8f56cca019c-1767898941",
-            "expires": "2026-01-08T19:32:15.229Z",
+            "value": "18f594d57feaf4a551407458d7a73d2b-1767899306",
+            "expires": "2026-01-08T19:38:20.959Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.305Z",
-            "lastAccessed": "2026-01-08T19:02:42.305Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "invab",
-            "value": "navbarctac_0|onboardingb_0",
-            "expires": "2027-01-08T19:02:15.230Z",
+            "value": "navbarctac_1|onboardingb_0",
+            "expires": "2027-01-08T19:08:20.959Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.305Z",
-            "lastAccessed": "2026-01-08T19:02:42.305Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "fs_marker",
             "value": "1",
-            "expires": "2026-01-08T19:32:15.230Z",
+            "expires": "2026-01-08T19:38:20.959Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.305Z",
-            "lastAccessed": "2026-01-08T19:02:42.305Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "__cf_bm",
-            "value": ".B2JHGgWi.LO0PwLpiBbNf7xkW749HZhrHcUMB6NdiE-1767898941-1.0.1.1-SBeCIt2SWYz4HjQz7TH08rfSXKZvLjzbOM8Tg_zO5ua4AK1eIXkQlvRFZlanZwSH7.arUP9Bp5kh6raStlmKuhNLFCr_j28Mgk2ntM9h3jRIEK9hYITx93cEp43Vlcfh",
-            "expires": "2026-01-08T19:32:15.230Z",
+            "value": "hj.XMqlc_I.adzE5JSTH3EMCXebp7GWQ8bQ_V3VGd.Q-1767899306-1.0.1.1-Bh1i.TuAU.Go8y.X0IIavMkLleS7TtdrnKUE.mhKej6c72ssAZkMp8r1CgTWo_Bp_ORJ5jhQeAjbBuoMuGrM0J1QuUAZTtoFtSCODmwHGx_zpicxdmfkXIacGDVCbJC.",
+            "expires": "2026-01-08T19:38:20.959Z",
             "domain": "investing.com",
             "path": "/",
             "secure": true,
             "httpOnly": true,
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.305Z",
-            "lastAccessed": "2026-01-08T19:02:42.305Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "__cflb",
-            "value": "02DiuGRugds2TUWHMkkPGro65dgYiP187zgd7uNi3b1Mn",
-            "expires": "2026-01-09T18:02:15.230Z",
+            "value": "02DiuGRugds2TUWHMkkPGro65dgYiP187kfZL8iocwDrU",
+            "expires": "2026-01-09T18:08:20.959Z",
             "domain": "www.investing.com",
             "path": "/",
             "secure": true,
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2026-01-08T19:02:42.305Z",
-            "lastAccessed": "2026-01-08T19:02:42.305Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "_dd_s",
-            "value": "aid=ae5dee61-49a3-4223-98b7-d212dbd1db1d&logs=1&id=2410d74b-5979-42fd-9852-2013ee218aca&created=1767898938054&expire=1767899838054",
-            "expires": "2027-01-08T19:02:18.000Z",
+            "value": "aid=8aba9698-2b47-4228-8754-de198f7e76e1&logs=1&id=39442f30-a9d4-4c69-99d9-a88a0f9d9ea4&created=1767899301964&expire=1767900201964",
+            "expires": "2027-01-08T19:08:21.000Z",
             "domain": "www.investing.com",
             "path": "/",
             "hostOnly": true,
-            "creation": "2026-01-08T19:02:42.310Z",
-            "lastAccessed": "2026-01-08T19:02:42.310Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
+          },
+          {
+            "key": "__eventn_id",
+            "value": "18f594d57feaf4a551407458d7a73d2b",
+            "expires": "2027-02-12T19:08:25.152Z",
+            "domain": "investing.com",
+            "path": "/",
+            "secure": true,
+            "hostOnly": false,
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "user-browser-sessions",
             "value": "1",
-            "expires": "2027-01-08T19:02:23.000Z",
+            "expires": "2027-01-08T19:08:24.000Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.310Z",
-            "lastAccessed": "2026-01-08T19:02:42.310Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "browser-session-counted",
             "value": "true",
-            "expires": "2026-01-08T19:52:42.302Z",
+            "expires": "2026-01-08T19:58:26.963Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.310Z",
-            "lastAccessed": "2026-01-08T19:02:42.310Z"
-          },
-          {
-            "key": "top_strip_variant",
-            "value": "%7B%22user_type%22%3A%22guest%22%2C%22variant_id%22%3A1%2C%22variant_name%22%3A%22Free%20users%201%2C%20NY_3%22%7D",
-            "expires": "2026-01-08T19:52:42.302Z",
-            "domain": "investing.com",
-            "path": "/",
-            "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.310Z",
-            "lastAccessed": "2026-01-08T19:02:42.310Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "ses_num",
             "value": "1",
-            "expires": "2027-01-08T19:02:25.000Z",
+            "expires": "2027-01-08T19:08:25.000Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.310Z",
-            "lastAccessed": "2026-01-08T19:02:42.310Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "last_smd",
-            "value": "825e3be7b6638f0f4d78a8f56cca019c-1767898941",
-            "expires": "2027-01-08T19:02:25.000Z",
+            "value": "18f594d57feaf4a551407458d7a73d2b-1767899306",
+            "expires": "2027-01-08T19:08:25.000Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.310Z",
-            "lastAccessed": "2026-01-08T19:02:42.310Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "adBlockerNewUserDomains",
-            "value": "1767898945",
-            "expires": "2027-01-08T19:02:25.000Z",
+            "value": "1767899305",
+            "expires": "2027-01-08T19:08:24.000Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.311Z",
-            "lastAccessed": "2026-01-08T19:02:42.311Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "lifetime_page_view_count",
             "value": "1",
-            "expires": "2027-01-08T19:02:25.000Z",
+            "expires": "2027-01-08T19:08:24.000Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.311Z",
-            "lastAccessed": "2026-01-08T19:02:42.311Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "invabr",
-            "value": "navbarctac_0",
-            "expires": "2027-01-08T19:02:25.000Z",
+            "value": "navbarctac_1",
+            "expires": "2027-01-08T19:08:25.000Z",
             "domain": "investing.com",
             "path": "/",
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.311Z",
-            "lastAccessed": "2026-01-08T19:02:42.311Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
-            "key": "__eventn_id",
-            "value": "825e3be7b6638f0f4d78a8f56cca019c",
-            "expires": "2027-02-12T19:02:28.114Z",
+            "key": "top_strip_variant",
+            "value": "%7B%22user_type%22%3A%22guest%22%2C%22variant_id%22%3A4%2C%22variant_name%22%3A%22Free%20users%204%2C%20PPR_Monthly%22%7D",
+            "expires": "2026-01-08T19:58:26.964Z",
             "domain": "investing.com",
             "path": "/",
-            "secure": true,
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.311Z",
-            "lastAccessed": "2026-01-08T19:02:42.311Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "g_state",
-            "value": "{\"i_l\":0,\"i_ll\":1767898949434,\"i_b\":\"hc5ZzaP24jzmVJXkKZEBvvU4deaToXlqGJetJJKMVVw\",\"i_e\":{\"enable_itp_optimization\":0}}",
-            "expires": "2026-07-07T19:02:29.000Z",
+            "value": "{\"i_l\":0,\"i_ll\":1767899305383,\"i_b\":\"pd6/DdrZBlrtPliX15AQLr5xVZpu86QtM0PVQi/oV1g\",\"i_e\":{\"enable_itp_optimization\":0}}",
+            "expires": "2026-07-07T19:08:25.000Z",
             "domain": "www.investing.com",
             "path": "/",
             "hostOnly": true,
-            "creation": "2026-01-08T19:02:42.311Z",
-            "lastAccessed": "2026-01-08T19:02:42.311Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "cf_clearance",
-            "value": "MtqVB6h6vsT2Kb1lbSHcDIm5HBBiplK9nmwoFgZWXm4-1767898962-1.2.1.1-avE.vPiWnE.JIBzXEVA1L8x5jgVhNZDG97NcweAXNuicl.K.EB8TI72DhP.0acFL8I8T.1.9sdbPa_Tn34sQCwoQryhKfAo_E1pjvA.4oxX_1eJ3sfAK0UXFkJK_ZXg3OfLzjsuEm7Mdm7bLbbYSpwApa8SoVU53pJUe4IEvaGjaNnfIoPefjyiYz8FPGcqRsQVEq5cJLeON_CrjofcNHulP48vlNEmw_q.oU9g1zbQ",
-            "expires": "2027-01-08T19:02:36.832Z",
+            "value": "yK1s0VFYFtT93SGc_N2js3lQX6j3d7NukBPbK1LoN1M-1767899312-1.2.1.1-pecmhsCelFCPXE6DX1FrXeXR3EdKmRQfLU2QJ8DLdtrzafQKxv6wZnNUq0NGjMbBZTOoVgdXTT.1u3sj5rR9kQPiQD3LYDPMaywDcNHvUOJQLkx51hr2sZYBnUT6cisE8i57A.9EPvFX4qbp9pToUGxxoq6PmzTfzCaQ42o_klbXPSIdT.oxk1yMNZLIO1BB4aAodymnA3Iu.TkPi7AogNxpbiBT6ThNzwayzaoMU2I",
+            "expires": "2027-01-08T19:08:26.241Z",
             "domain": "investing.com",
             "path": "/",
             "secure": true,
             "httpOnly": true,
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.311Z",
-            "lastAccessed": "2026-01-08T19:02:42.311Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "_hjSessionUser_174945",
-            "value": "eyJpZCI6IjE4OGRhZmM0LWY2ZWUtNWM0NC04NGFmLTY2OTZhOWJkOWJiYyIsImNyZWF0ZWQiOjE3Njc4OTg5NTcxOTksImV4aXN0aW5nIjpmYWxzZX0=",
-            "expires": "2027-01-08T19:02:37.000Z",
+            "value": "eyJpZCI6ImJjNzExNzZiLTgwYzktNTYxZi05ZDgzLWYyZGY3MWQxNDYzZCIsImNyZWF0ZWQiOjE3Njc4OTkzMDY0OTksImV4aXN0aW5nIjpmYWxzZX0=",
+            "expires": "2027-01-08T19:08:26.000Z",
             "domain": "investing.com",
             "path": "/",
             "secure": true,
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.311Z",
-            "lastAccessed": "2026-01-08T19:02:42.311Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "_hjSession_174945",
-            "value": "eyJpZCI6ImViMGU5MzVkLWQ4Y2ItNDM3Ny05NzU5LTU5YjZmMGNlYWY4MiIsImMiOjE3Njc4OTg5NTcyMDcsInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjAsImZzIjoxLCJzcCI6MH0=",
-            "expires": "2026-01-08T19:32:37.000Z",
+            "value": "eyJpZCI6ImY4YjYwZTVhLTc0MDQtNGE3Yy1iZGMzLWQ2OTYzZmQwNGU0NyIsImMiOjE3Njc4OTkzMDY1MDAsInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjAsImZzIjoxLCJzcCI6MH0=",
+            "expires": "2026-01-08T19:38:26.000Z",
             "domain": "investing.com",
             "path": "/",
             "secure": true,
             "hostOnly": false,
-            "creation": "2026-01-08T19:02:42.312Z",
-            "lastAccessed": "2026-01-08T19:02:42.312Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "_hjHasCachedUserAttributes",
             "value": "true",
-            "expires": "2026-01-08T19:52:42.304Z",
+            "expires": "2026-01-08T19:58:26.964Z",
             "domain": "www.investing.com",
             "path": "/",
             "secure": true,
             "hostOnly": true,
-            "creation": "2026-01-08T19:02:42.312Z",
-            "lastAccessed": "2026-01-08T19:02:42.312Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           },
           {
             "key": "_imntz_error",
             "value": "0",
-            "expires": "2026-01-09T19:02:41.111Z",
+            "expires": "2026-01-09T19:08:26.707Z",
             "domain": "www.investing.com",
             "path": "/",
             "hostOnly": true,
-            "creation": "2026-01-08T19:02:42.312Z",
-            "lastAccessed": "2026-01-08T19:02:42.312Z"
+            "creation": "2026-01-08T19:08:26.964Z",
+            "lastAccessed": "2026-01-08T19:08:26.964Z"
           }
         ]
       },
       "userData": {},
       "maxErrorScore": 3,
       "errorScoreDecrement": 0.5,
-      "expiresAt": "2026-01-08T19:52:14.128Z",
-      "createdAt": "2026-01-08T19:02:14.128Z",
+      "expiresAt": "2026-01-08T19:58:20.652Z",
+      "createdAt": "2026-01-08T19:08:20.652Z",
       "usageCount": 1,
       "maxUsageCount": 50,
       "errorScore": 0
