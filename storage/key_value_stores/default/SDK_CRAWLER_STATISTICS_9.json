@@ -8,18 +8,39 @@
   "requestMaxDurationMillis": 0,
   "requestTotalFailedDurationMillis": 0,
   "requestTotalFinishedDurationMillis": 0,
-  "crawlerStartedAt": "2026-01-07T01:00:08.006Z",
-  "crawlerFinishedAt": null,
-  "statsPersistedAt": "2026-01-07T01:00:49.770Z",
-  "crawlerRuntimeMillis": 60364,
-  "crawlerLastStartTimestamp": 1767747589406,
+  "crawlerStartedAt": "2026-01-08T19:00:21.168Z",
+  "crawlerFinishedAt": "2026-01-08T19:01:48.527Z",
+  "statsPersistedAt": "2026-01-08T19:01:48.527Z",
+  "crawlerRuntimeMillis": 87992,
+  "crawlerLastStartTimestamp": 1767898820535,
   "requestRetryHistogram": [],
   "statsId": 9,
   "requestAvgFailedDurationMillis": null,
   "requestAvgFinishedDurationMillis": null,
   "requestTotalDurationMillis": 0,
   "requestsTotal": 0,
-  "requestsWithStatusCode": {},
+  "requestsWithStatusCode": {
+    "403": 1
+  },
   "errors": {},
-  "retryErrors": {}
+  "retryErrors": {
+    "/home/zshmeta/price-crawl/node_modules/@crawlee/src/crawlers/crawler_utils.ts:13:11": {
+      "missing error code": {
+        "Error": {
+          "Navigation timed out after 30 seconds.": {
+            "count": 1
+          }
+        }
+      }
+    },
+    "/home/zshmeta/price-crawl/node_modules/@crawlee/src/internals/basic-crawler.ts:1353:19": {
+      "missing error code": {
+        "Error": {
+          "Request blocked - received 403 status code.": {
+            "count": 1
+          }
+        }
+      }
+    }
+  }
 }

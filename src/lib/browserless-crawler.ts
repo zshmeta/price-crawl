@@ -57,7 +57,7 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
             // Extract data from the table rows
             const rawData = await page.$$eval(rowSelector, (rows: any[]) => {
                 return rows.map((row: any) => {
-                    const nameEl = row.querySelector('h4') || row.querySelector('a.font-semibold');
+                    const nameEl = row.querySelector('h4') || row.querySelector('a.font-semibold') || row.querySelector('[class*="cellNameText"]');
                     const name = nameEl?.textContent?.trim();
                     
                     if (!name) return null;
@@ -67,7 +67,7 @@ export async function scrapeWithBrowserless(config: BrowserlessConfig): Promise<
                     const href = linkEl?.getAttribute('href') || undefined;
                     
                     // Extract all cell values
-                    const cells = Array.from(row.querySelectorAll('td'));
+                    const cells = Array.from(row.querySelectorAll('td, [class*="datatable_cell"]:not([class*="wrapper"])'));
                     const cellValues = cells.map((cell: any) => cell.textContent?.trim() || '');
                     
                     return {

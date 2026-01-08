@@ -2,7 +2,9 @@
     "equities": {
         "baseUrl": "https://www.investing.com/equities",
         "regions": [
-            "united-states"
+            "united-states",
+            "france",
+            "australia"
         ],
         "pollIntervalMs": 30000
     },
@@ -23,7 +25,11 @@
     "commodities": {
         "baseUrl": "https://www.investing.com/commodities",
         "regions": [
-            "real-time-futures"
+            "real-time-futures",
+            "energy",
+            "metals",
+            "grains",
+            "softs"
         ],
         "pollIntervalMs": 30000
     }

@@ -8,24 +8,26 @@
   "requestMaxDurationMillis": 0,
   "requestTotalFailedDurationMillis": 0,
   "requestTotalFinishedDurationMillis": 0,
-  "crawlerStartedAt": "2026-01-07T00:59:52.680Z",
-  "crawlerFinishedAt": null,
-  "statsPersistedAt": "2026-01-07T01:00:49.712Z",
-  "crawlerRuntimeMillis": 61205,
-  "crawlerLastStartTimestamp": 1767747588507,
+  "crawlerStartedAt": "2026-01-08T19:00:10.401Z",
+  "crawlerFinishedAt": "2026-01-08T19:00:44.067Z",
+  "statsPersistedAt": "2026-01-08T19:00:44.067Z",
+  "crawlerRuntimeMillis": 33682,
+  "crawlerLastStartTimestamp": 1767898810385,
   "requestRetryHistogram": [],
   "statsId": 2,
   "requestAvgFailedDurationMillis": null,
   "requestAvgFinishedDurationMillis": null,
   "requestTotalDurationMillis": 0,
   "requestsTotal": 0,
-  "requestsWithStatusCode": {},
+  "requestsWithStatusCode": {
+    "200": 1
+  },
   "errors": {},
   "retryErrors": {
-    "/home/zshmeta/price-crawl/node_modules/@crawlee/src/crawlers/crawler_utils.ts:13:11": {
+    "/home/zshmeta/price-crawl/node_modules/@crawlee/src/resource-clients/common/base-client.ts:11:15": {
       "missing error code": {
         "Error": {
-          "Navigation timed out after 30 seconds.": {
+          "Request queue with id: b4f22691-d2e2-4d89-a8b4-bf0336e71730 does not exist.": {
             "count": 1
           }
         }

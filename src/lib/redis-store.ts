@@ -51,7 +51,7 @@ export class RedisStore {
         try {
             await this.connectToRedis();
         } catch (error) {
-            log.warning(`[RedisStore/${this.category}] Redis unavailable, using JSON fallback: ${error}`);
+            log.info(`[RedisStore/${this.category}] Redis unavailable, using JSON fallback (this is expected if Redis is not running): ${error}`);
             await this.initJsonFallback();
         }
 
@@ -92,7 +92,7 @@ export class RedisStore {
         });
 
         this.redis.on('close', () => {
-            log.warning(`[RedisStore/${this.category}] Redis connection closed`);
+            log.info(`[RedisStore/${this.category}] Redis connection closed`);
             this.isAvailable = false;
         });
 
@@ -110,7 +110,12 @@ export class RedisStore {
      * Handle Redis errors by logging and potentially triggering fallback.
      */
     private handleRedisError(error: Error): void {
-        log.error(`[RedisStore/${this.category}] Redis error: ${error.message}`);
+        // If we are already unavailable, downgrade to debug to avoid log spam
+        if (!this.isAvailable) {
+            log.debug(`[RedisStore/${this.category}] Redis error (suppressed): ${error.message}`);
+            return;
+        }
+        log.warning(`[RedisStore/${this.category}] Redis error: ${error.message}`);
         this.isAvailable = false;
     }
 

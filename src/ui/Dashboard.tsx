@@ -79,9 +79,16 @@ export const Dashboard: React.FC<DashboardProps> = ({ crawlerManager }) => {
 
     useEffect(() => {
         setStates(crawlerManager.getAllStates());
+        
+        let lastUpdate = 0;
+        const THROTTLE_MS = 500;
 
         const handleUpdate = (newStates: CrawlerState[]) => {
-            setStates(newStates);
+            const now = Date.now();
+            if (now - lastUpdate > THROTTLE_MS) {
+                setStates(newStates);
+                lastUpdate = now;
+            }
         };
 
         crawlerManager.on('state-update', handleUpdate);

@@ -3,37 +3,27 @@
   "requestsFailed": 0,
   "requestsRetries": 0,
   "requestsFailedPerMinute": 0,
-  "requestsFinishedPerMinute": 1,
-  "requestMinDurationMillis": 7583,
-  "requestMaxDurationMillis": 7583,
+  "requestsFinishedPerMinute": 8,
+  "requestMinDurationMillis": 5815,
+  "requestMaxDurationMillis": 5815,
   "requestTotalFailedDurationMillis": 0,
-  "requestTotalFinishedDurationMillis": 7583,
-  "crawlerStartedAt": "2026-01-07T00:59:49.590Z",
-  "crawlerFinishedAt": null,
-  "statsPersistedAt": "2026-01-07T01:00:49.684Z",
-  "crawlerRuntimeMillis": 61442,
-  "crawlerLastStartTimestamp": 1767747588243,
+  "requestTotalFinishedDurationMillis": 5815,
+  "crawlerStartedAt": "2026-01-08T19:00:06.233Z",
+  "crawlerFinishedAt": "2026-01-08T19:00:13.500Z",
+  "statsPersistedAt": "2026-01-08T19:00:13.500Z",
+  "crawlerRuntimeMillis": 7280,
+  "crawlerLastStartTimestamp": 1767898806220,
   "requestRetryHistogram": [
     1
   ],
   "statsId": 0,
   "requestAvgFailedDurationMillis": null,
-  "requestAvgFinishedDurationMillis": 7583,
-  "requestTotalDurationMillis": 7583,
+  "requestAvgFinishedDurationMillis": 5815,
+  "requestTotalDurationMillis": 5815,
   "requestsTotal": 1,
   "requestsWithStatusCode": {
     "200": 1
   },
   "errors": {},
-  "retryErrors": {
-    "/home/zshmeta/price-crawl/node_modules/@crawlee/src/crawlers/crawler_utils.ts:13:11": {
-      "missing error code": {
-        "Error": {
-          "Navigation timed out after 30 seconds.": {
-            "count": 1
-          }
-        }
-      }
-    }
-  }
+  "retryErrors": {}
 }
